@@ -122,5 +122,79 @@ try ( BufferedReader bis = new BufferedReader(new InputStreamReader(System.in)))
 # -----------------------WRITER---------------------
 
 
-## output stream writer 
+## --> output stream writer - convert the character stream to byte stream
+    four public method---
+    close()
+    getEncoding()
+    write() - 3 variation   
+    flush()
 
+```java
+    try (OutputStreamWriter osw = new OutputStreamWriter(System.out)){
+            osw.write("hello harshit");
+            osw.write(97);//---> a
+            osw.write(10);//-----> new line
+            osw.write('A');
+            osw.write('\n');
+            char arr[] = "hello world".toCharArray();
+            osw.write(arr);
+            osw.write("hello harshit");
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+```
+# same goes for other like fileWriter it use to write the program in file
+
+```java
+    try (FileWriter fw = new FileWriter("note.txt")){
+            fw.write("hello harshit"); /// over write the text
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+```
+# we have to append the text then
+```java
+     // but we want to append the code                append
+        try (FileWriter fw = new FileWriter("note.txt",true)){
+            fw.write("hello harshit"); /// over write the text
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+```
+
+
+```java
+    // creating the file
+        try {
+            File fo = new File("new-file.txt");
+            fo.createNewFile(); //auto matically create the new file
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // writing in the file
+        try(FileWriter fw = new FileWriter("new-file.txt")) {
+            fw.write("ram ram bhaiyo");
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        // read the file 
+        try ( BufferedReader bis = new BufferedReader(new FileReader("new-file.txt"))){
+            System.out.println("you type" + bis.readLine());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // deleting the file
+        try {
+            File fo = new File("randon.txt");
+            fo.createNewFile(); //auto matically create the new file
+            if(fo.delete()==true){
+                System.out.println("the name of the file is already deleted    "+fo.getName());
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+```
