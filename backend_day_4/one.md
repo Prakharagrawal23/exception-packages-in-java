@@ -46,4 +46,52 @@
 ### soft reference - if there is very urgent(heap is almost fill) then delete wise not 
 ![image](image6.png)
 
+# HEAP MEMORY - there are teo type 
 
+## 1 => young generation (minor gc)
+## 2 => old generation / tenured generation - a)eden b)s0 c)s1(survior space) (major gc)
+## 3 => Metaspace/Nonspace
+
+    1---whenever we create the new object the firstly we store in eden
+    2--- after garbage collecter envokes then Garbage collector do two things
+        
+        --- mark and sweap algorithm - 
+            -- Mark -> check the object which have no reference then mark that object .
+            -- sweap -> do that delete the mark object and move the other object into the s0 space.
+![image](image7.png)
+### 1 gc envokes
+![](image8.png)
+    
+    now we create the new object then another garbage collecter envokes then
+    --- alternative we put in s0 and s1 and increase the age
+### 2 gc envokes
+![image](image9.png)
+
+    age it is created by minor garbage collector
+
+    threshold age is reach 3 then we have to promote them
+### 3 gc envokes
+![](image10.png)
+
+### promotion of the object which cross the threshold 
+## the promoted object store in the ***old generation*** and in the old generation we have ***major garbage collection*** which check in the gap og apporex 30min
+
+## mata space / permanent generation - store class variables , class meta data(store info about the class from which object is being created), constants  
+    permanent generation is connect with the heap but meta space is not connected
+
+# garbage collecter algorithm :-
+    --- make and sweap algorithm
+    --- make and sweap algorithm with compact memory
+![](image12.png)  - it compact the memory
+
+## version gc 
+
+### 1--serial gc  (1 thread) 
+    disadv --- slow , explensive(when serial gc envoke then all application is stop)
+### 2--parallel gc (default in java) 
+    - multi thread
+### 3--concurend mark and sweap(CMS)
+    - when application is working then the gc is also working parallel but CMS nit sure 100% that application will nit stop 
+    
+### 4--GI garbage collecter
+    - same as CMS nut the compaction is also there
